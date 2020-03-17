@@ -6,6 +6,9 @@ using DotNetNoteCore.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace DotNetNoteCore
 {
@@ -35,7 +38,7 @@ namespace DotNetNoteCore
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage(); //개발자 예외 페이지
                 app.UseDatabaseErrorPage();
             }
             else
@@ -45,7 +48,12 @@ namespace DotNetNoteCore
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
+            app.UseStaticFiles(
+                new StaticFileOptions()
+                {
+                    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"MyStaticFiles")), RequestPath = new PathString("/StaticFiles")
+                });
 
             app.UseRouting();
 
