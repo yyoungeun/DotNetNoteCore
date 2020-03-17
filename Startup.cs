@@ -38,7 +38,7 @@ namespace DotNetNoteCore
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage(); //°³¹ßÀÚ ¿¹¿Ü ÆäÀÌÁö
+                app.UseDeveloperExceptionPage(); //ê°œë°œì ì˜ˆì™¸ í˜ì´ì§€
                 app.UseDatabaseErrorPage();
             }
             else
